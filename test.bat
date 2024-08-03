@@ -1,4 +1,4 @@
 make brainfuck
-brainfuck 1easy.bf
-brainfuck 2medium.bf
-brainfuck 3hard.bf
+brainfuck bf-tests\1easy.bf
+brainfuck bf-tests\2medium.bf
+brainfuck bf-tests\3hard.bf

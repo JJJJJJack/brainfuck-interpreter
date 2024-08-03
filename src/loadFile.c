@@ -35,7 +35,7 @@ uint8_t loadFile(programCtx *pCtx, const char *filename) {
     }
 
     if (fclose(fp) != 0) {
-        printf("Could not close file %s", filename);
+        printf("Could not close file \"%s\"\n", filename);
         return 1;
     }
 

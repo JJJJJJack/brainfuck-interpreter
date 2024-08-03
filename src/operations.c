@@ -125,33 +125,6 @@ uint8_t runLoopTailRecursive(programCtx *pCtx, uint64_t nestedLevel) {
                 *pCtx->dataPtr = (uint8_t)getchar();
                 break;
             case '[':
-                // if (pCtx->instructionPtr == currLoopStart && *pCtx->dataPtr != 0) {
-                //     break;
-                // }
-                // if ((*pCtx->dataPtr) != 0) {
-                //     runLoopTailRecursive(pCtx, nestedLevel + 1);
-                //     break;
-                // }
-                // pCtx->instructionPtr = currLoopEnd;
-                // return;
-                // if (pCtx->instructionPtr == currLoopStart && *pCtx->dataPtr == 0) {
-                //     printf("UNREACHABLE 1\n");
-                //     pCtx->instructionPtr = currLoopEnd;
-                //     return;
-                // }
-                // if (pCtx->instructionPtr == currLoopStart && *pCtx->dataPtr != 0) {
-                //     break;
-                // }
-                // if (pCtx->instructionPtr != currLoopStart && *pCtx->dataPtr != 0) {
-                //     runLoopTailRecursive(pCtx, nestedLevel + 1);
-                //     printWhereErrorIs(pCtx);
-                //     break;
-                // }
-                // if (pCtx->instructionPtr != currLoopStart && *pCtx->dataPtr == 0) {
-                //     printWhereErrorIs(pCtx);
-                //     return;
-                // }
-                // printf("Error in loops logic\n");
                 if (*pCtx->dataPtr == 0 && pCtx->instructionPtr == currLoopStart) {
                     pCtx->instructionPtr = currLoopEnd;
                     return 0;
@@ -159,38 +132,15 @@ uint8_t runLoopTailRecursive(programCtx *pCtx, uint64_t nestedLevel) {
                 if (*pCtx->dataPtr != 0 && pCtx->instructionPtr == currLoopStart) {
                     break;
                 }
-                // printf("asd");
 
                 runLoopTailRecursive(pCtx, nestedLevel + 1);
                 break;
             case ']':
-                // if (*pCtx->dataPtr == 0 && pCtx->instructionPtr == currLoopEnd) {
-                //     printWhereErrorIs(pCtx);
-                //     return;
-                // }
-                // if (*pCtx->dataPtr != 0 && pCtx->instructionPtr == currLoopEnd) {
-                //     pCtx->instructionPtr = currLoopStart;
-                //     break;
-                // }
-                // if (*pCtx->dataPtr != 0 && pCtx->instructionPtr != currLoopEnd) {
-                //     pCtx->instructionPtr = findLoopStart(pCtx->instructionPtr);
-                //     break;
-                // }
-                // if (*pCtx->dataPtr == 0 && pCtx->instructionPtr != currLoopEnd) {
-                //     pCtx->instructionPtr = findLoopStart(pCtx->instructionPtr);
-                //     printWhereErrorIs(pCtx);
-                //     return;
-                // }
-                // printf("Error in loops logic\n");
                 pCtx->instructionPtr = currLoopStart - 1;
                 break;
         }
 
         INC(pCtx->instructionPtr);
-
-#ifdef DEBUG
-        printf("%p\n", pCtx->instructionPtr);
-#endif
     }
 
     return 1;
